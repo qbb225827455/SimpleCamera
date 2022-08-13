@@ -14,7 +14,12 @@ class PhotoViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     
     @IBAction func save(sender: UIButton) {
+        guard let imageToSave = image else {
+            return
+        }
         
+        UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil)
+        dismiss(animated: true)
     }
     
     override func viewDidLoad() {
