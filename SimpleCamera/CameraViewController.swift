@@ -123,6 +123,11 @@ class CameraViewController: UIViewController {
         toggleCameraSwipeDown.addTarget(self, action: #selector(toggleCamera))
         view.addGestureRecognizer(toggleCameraSwipeUp)
         view.addGestureRecognizer(toggleCameraSwipeDown)
+        
+        pinchGesture.addTarget(self, action: #selector(pinchToZoom(_:)))
+        view.addGestureRecognizer(pinchGesture)
+    }
+    
     @objc func toggleCamera() {
         
         captureSession.beginConfiguration()
@@ -151,6 +156,41 @@ class CameraViewController: UIViewController {
         currentDevice = newCurrentDevice
         captureSession.commitConfiguration()
     }
+    
+    @objc func pinchToZoom(_ gesture: UIPinchGestureRecognizer) {
+        
+        let scale = currentDevice.videoZoomFactor
+        
+        switch gesture.state {
+        case .began:
+            fallthrough
+            
+        case .changed:
+            let minAvailableZoomScale = currentDevice.minAvailableVideoZoomFactor
+            let maxAvailableZoomScale = 5.0
+            
+            var result = max(minAvailableZoomScale, min(gesture.scale * scale, maxAvailableZoomScale))
+            result = (result * 10.0).rounded() / 10
+            
+            let resultTemp = Int(result * 10) % 10
+            if resultTemp == 0 {
+                self.scaleLabel.text = "\(Int(result))x"
+            } else {
+                self.scaleLabel.text = "\(result)x"
+            }
+            
+            do {
+                try currentDevice.lockForConfiguration()
+                currentDevice?.ramp(toVideoZoomFactor: result, withRate: 1.0)
+                //currentDevice.videoZoomFactor = result
+                currentDevice.unlockForConfiguration()
+            } catch {
+                print(error)
+            }
+            
+        default:
+            return
+        }
     }
     }
 }
