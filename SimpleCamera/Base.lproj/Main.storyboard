@@ -32,22 +32,37 @@
                                     <action selector="captureWithSender:" destination="dK3-WJ-2Wg" eventType="touchUpInside" id="lqc-MF-dth"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyv-E3-bHO">
+                                <rect key="frame" x="20" y="407" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3fV-6L-AeH"/>
+                                    <constraint firstAttribute="width" constant="30" id="cS6-Vt-3F4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="52E-Sp-VKu"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="uyv-E3-bHO" firstAttribute="centerY" secondItem="E9p-US-NfP" secondAttribute="centerY" id="HpG-ou-jUq"/>
                             <constraint firstItem="52E-Sp-VKu" firstAttribute="bottom" secondItem="leb-Jd-i7D" secondAttribute="bottom" constant="50" id="R2N-Sw-fmi"/>
                             <constraint firstItem="leb-Jd-i7D" firstAttribute="centerX" secondItem="E9p-US-NfP" secondAttribute="centerX" id="cAz-rQ-DpK"/>
+                            <constraint firstItem="uyv-E3-bHO" firstAttribute="leading" secondItem="52E-Sp-VKu" secondAttribute="leading" constant="20" id="oRS-ys-KOG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cameraBtn" destination="leb-Jd-i7D" id="8Yg-Xz-h17"/>
+                        <outlet property="scaleLabel" destination="uyv-E3-bHO" id="nCO-jr-uun"/>
                         <segue destination="aTI-Bf-s6d" kind="presentation" identifier="showImage" modalPresentationStyle="fullScreen" id="9zz-gw-Ts1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ler-GT-OHm" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-539" y="86"/>
+            <point key="canvasLocation" x="-540" y="85.308056872037909"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="SPg-iQ-RvO">
