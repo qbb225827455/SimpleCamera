@@ -13,6 +13,17 @@ class CameraViewController: UIViewController {
     
     @IBAction func capture(sender: UIButton) {
         
+        let photoSetting = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+        photoSetting.isAutoStillImageStabilizationEnabled = true
+        photoSetting.isHighResolutionPhotoEnabled = true
+        if currentDevice.hasFlash {
+            photoSetting.flashMode = .auto
+        } else {
+            photoSetting.flashMode = .off
+        }
+        
+        imageOutput.isHighResolutionCaptureEnabled = true
+        imageOutput.capturePhoto(with: photoSetting, delegate: self)
     }
     
     @IBAction func closePhotoView(segue: UIStoryboardSegue) {
