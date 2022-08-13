@@ -192,5 +192,20 @@ class CameraViewController: UIViewController {
             return
         }
     }
+
+extension CameraViewController: AVCapturePhotoCaptureDelegate {
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        
+        guard error == nil else {
+            return
+        }
+        
+        guard let imageData = photo.fileDataRepresentation() else {
+            return
+        }
+        
+        captureImage = UIImage(data: imageData)
+        performSegue(withIdentifier: "showImage", sender: self)
     }
 }
