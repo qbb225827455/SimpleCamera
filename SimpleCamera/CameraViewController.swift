@@ -6,10 +6,28 @@
 //
 
 import UIKit
+import AVFoundation
 
 class CameraViewController: UIViewController {
+    
+    let captureSession = AVCaptureSession()
+    
+    var rearCamera: AVCaptureDevice?
+    var frontCamera: AVCaptureDevice?
+    var currentDevice: AVCaptureDevice!
+    
+    var imageOutput: AVCapturePhotoOutput!
+    var captureImage: UIImage?
+    
+    var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
+    
+    var toggleCameraSwipeUp = UISwipeGestureRecognizer()
+    var toggleCameraSwipeDown = UISwipeGestureRecognizer()
+    
+    var pinchGesture = UIPinchGestureRecognizer()
 
-    @IBOutlet var cameraBtn:UIButton!
+    @IBOutlet var cameraBtn: UIButton!
+    @IBOutlet var scaleLabel: UILabel!
     
     @IBAction func capture(sender: UIButton) {
         
@@ -37,6 +55,11 @@ class CameraViewController: UIViewController {
         let largeBoldDoc = UIImage(systemName: "circle.inset.filled", withConfiguration: largeConfig)
         
         cameraBtn.setImage(largeBoldDoc, for: .normal)
+        
+        scaleLabel.layer.masksToBounds = true
+        scaleLabel.layer.cornerRadius = 15
+        
+        configure()
     }
 
     override func didReceiveMemoryWarning() {
@@ -192,6 +215,14 @@ class CameraViewController: UIViewController {
             return
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showImage" {
+            let destinationVC = segue.destination as! PhotoViewController
+            destinationVC.image = captureImage
+        }
+    }
+}
 
 extension CameraViewController: AVCapturePhotoCaptureDelegate {
     
