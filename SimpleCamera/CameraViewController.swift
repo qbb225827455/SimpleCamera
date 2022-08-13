@@ -27,7 +27,7 @@ class CameraViewController: UIViewController {
     }
     
     @IBAction func closePhotoView(segue: UIStoryboardSegue) {
-    
+        dismiss(animated: true)
     }
     
     override func viewDidLoad() {
