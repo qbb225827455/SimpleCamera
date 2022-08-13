@@ -44,5 +44,42 @@ class CameraViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillLayoutSubviews() {
+        
+        if let connection = cameraPreviewLayer?.connection {
+            
+            let currentDevice = UIDevice.current
+            let orientation: UIDeviceOrientation = currentDevice.orientation
+            let previewLayerConnection: AVCaptureConnection = connection
+            
+            if previewLayerConnection.isVideoOrientationSupported {
+                
+                switch orientation {
+                    
+                case .portrait:
+                    self.updatePreviewLayer(layer: previewLayerConnection, orientation: .portrait)
+                    
+                case .landscapeRight:
+                    self.updatePreviewLayer(layer: previewLayerConnection, orientation: .landscapeLeft)
+                    
+                case .landscapeLeft:
+                    self.updatePreviewLayer(layer: previewLayerConnection, orientation: .landscapeRight)
+                    
+                case .portraitUpsideDown:
+                    self.updatePreviewLayer(layer: previewLayerConnection, orientation: .portraitUpsideDown)
+                    
+                default:
+                    self.updatePreviewLayer(layer: previewLayerConnection, orientation: .portrait)
+                }
+            }
+        }
+    }
+    
+    func updatePreviewLayer(layer: AVCaptureConnection, orientation: AVCaptureVideoOrientation) {
+        
+        layer.videoOrientation = orientation
+
+        cameraPreviewLayer!.frame = view.layer.bounds
+    }
     
 }
