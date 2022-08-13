@@ -82,4 +82,37 @@ class CameraViewController: UIViewController {
         cameraPreviewLayer!.frame = view.layer.bounds
     }
     
+    func configure() {
+        
+        captureSession.sessionPreset = AVCaptureSession.Preset.photo
+        
+        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .unspecified)
+        for device in deviceDiscoverySession.devices {
+            if device.position == .back {
+                rearCamera = device
+            } else if device.position == .front {
+                frontCamera = device
+            }
+        }
+
+        currentDevice = rearCamera
+
+        guard let captureDeviceInput = try? AVCaptureDeviceInput(device: currentDevice) else {
+            return
+        }
+        
+        imageOutput = AVCapturePhotoOutput()
+        
+        captureSession.addInput(captureDeviceInput)
+        captureSession.addOutput(imageOutput)
+        
+        // 建立相機預覽
+        cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        view.layer.addSublayer(cameraPreviewLayer!)
+        cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        cameraPreviewLayer?.frame = view.layer.frame
+
+        view.bringSubviewToFront(cameraBtn)
+        view.bringSubviewToFront(scaleLabel)
+        captureSession.startRunning()
 }
