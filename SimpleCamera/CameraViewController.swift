@@ -115,4 +115,42 @@ class CameraViewController: UIViewController {
         view.bringSubviewToFront(cameraBtn)
         view.bringSubviewToFront(scaleLabel)
         captureSession.startRunning()
+        
+        // 切換相機
+        toggleCameraSwipeUp.direction = .up
+        toggleCameraSwipeUp.addTarget(self, action: #selector(toggleCamera))
+        toggleCameraSwipeDown.direction = .down
+        toggleCameraSwipeDown.addTarget(self, action: #selector(toggleCamera))
+        view.addGestureRecognizer(toggleCameraSwipeUp)
+        view.addGestureRecognizer(toggleCameraSwipeDown)
+    @objc func toggleCamera() {
+        
+        captureSession.beginConfiguration()
+        
+        guard let newCurrentDevice = (currentDevice.position == AVCaptureDevice.Position.back) ? frontCamera : rearCamera else {
+            return
+        }
+        
+        // Remove all input from session
+        for input in captureSession.inputs {
+            captureSession.removeInput(input)
+        }
+        
+        let cameraInput: AVCaptureDeviceInput
+        do {
+            cameraInput = try AVCaptureDeviceInput(device: newCurrentDevice)
+        } catch {
+            print(error)
+            return
+        }
+        
+        if captureSession.canAddInput(cameraInput) {
+            captureSession.addInput(cameraInput)
+        }
+        
+        currentDevice = newCurrentDevice
+        captureSession.commitConfiguration()
+    }
+    }
+    }
 }
