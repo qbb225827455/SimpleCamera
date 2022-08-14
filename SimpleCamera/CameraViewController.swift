@@ -367,8 +367,9 @@ class CameraViewController: UIViewController {
             destinationVC.image = captureImage
             
         case "playVideo":
-            let destinationVC = segue.destination as! AVPlayerViewController
+            let destinationVC = segue.destination as! PlayerViewController
             let videoFileURL = sender as! URL
+            destinationVC.videoURL = videoFileURL
             destinationVC.player = AVPlayer(url: videoFileURL)
             
         default:

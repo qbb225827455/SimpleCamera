@@ -169,7 +169,7 @@
         <!--AV Player View Controller-->
         <scene sceneID="lwO-w1-NsR">
             <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="grS-mv-9YC" sceneMemberID="viewController"/>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="grS-mv-9YC" customClass="PlayerViewController" customModule="SimpleCamera" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ceX-ot-A4S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="285" y="480"/>

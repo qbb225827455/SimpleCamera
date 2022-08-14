@@ -14,6 +14,7 @@
 		EEE406C828A65E690085EB75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEE406C628A65E690085EB75 /* LaunchScreen.storyboard */; };
 		EEE406D028A664100085EB75 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE406CF28A664100085EB75 /* CameraViewController.swift */; };
 		EEE406D328A664280085EB75 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE406D228A664280085EB75 /* PhotoViewController.swift */; };
+		EEE406D528A9477F0085EB75 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE406D428A9477F0085EB75 /* PlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		EEE406C928A65E690085EB75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEE406CF28A664100085EB75 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		EEE406D228A664280085EB75 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		EEE406D428A9477F0085EB75 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				EEE406C928A65E690085EB75 /* Info.plist */,
 				EEE406CF28A664100085EB75 /* CameraViewController.swift */,
 				EEE406D228A664280085EB75 /* PhotoViewController.swift */,
+				EEE406D428A9477F0085EB75 /* PlayerViewController.swift */,
 			);
 			path = SimpleCamera;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 				EEE406D328A664280085EB75 /* PhotoViewController.swift in Sources */,
 				EEE406BE28A65E680085EB75 /* SceneDelegate.swift in Sources */,
 				EEE406D028A664100085EB75 /* CameraViewController.swift in Sources */,
+				EEE406D528A9477F0085EB75 /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
