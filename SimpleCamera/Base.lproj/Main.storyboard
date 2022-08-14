@@ -29,7 +29,23 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="captureWithSender:" destination="dK3-WJ-2Wg" eventType="touchUpInside" id="lqc-MF-dth"/>
+                                    <action selector="capturePhotoWithSender:" destination="dK3-WJ-2Wg" eventType="touchUpInside" id="H0T-Bc-zSy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ake-6a-CbV">
+                                <rect key="frame" x="165" y="700" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="2Vj-QG-jXn"/>
+                                    <constraint firstAttribute="height" constant="60" id="Dr7-cU-hG4"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" imagePadding="0.0">
+                                    <imageReference key="image" image="dot.circle.viewfinder" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                    <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="captureVideoWithSender:" destination="dK3-WJ-2Wg" eventType="touchUpInside" id="2sD-Jx-2Av"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyv-E3-bHO">
@@ -43,21 +59,38 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  00 : 00 : 00  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TaR-EH-Kmz">
+                                <rect key="frame" x="147.33333333333334" y="665" width="95.666666666666657" height="20"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Kby-j3-QWA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="52E-Sp-VKu"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="Ake-6a-CbV" firstAttribute="centerX" secondItem="E9p-US-NfP" secondAttribute="centerX" id="1W1-QU-1iQ"/>
+                            <constraint firstItem="leb-Jd-i7D" firstAttribute="top" secondItem="TaR-EH-Kmz" secondAttribute="bottom" constant="15" id="2qy-W2-KF5"/>
+                            <constraint firstItem="TaR-EH-Kmz" firstAttribute="centerX" secondItem="E9p-US-NfP" secondAttribute="centerX" id="9zL-zC-k1z"/>
                             <constraint firstItem="uyv-E3-bHO" firstAttribute="centerY" secondItem="E9p-US-NfP" secondAttribute="centerY" id="HpG-ou-jUq"/>
+                            <constraint firstItem="52E-Sp-VKu" firstAttribute="bottom" secondItem="Ake-6a-CbV" secondAttribute="bottom" constant="50" id="LfU-KR-nLN"/>
                             <constraint firstItem="52E-Sp-VKu" firstAttribute="bottom" secondItem="leb-Jd-i7D" secondAttribute="bottom" constant="50" id="R2N-Sw-fmi"/>
                             <constraint firstItem="leb-Jd-i7D" firstAttribute="centerX" secondItem="E9p-US-NfP" secondAttribute="centerX" id="cAz-rQ-DpK"/>
                             <constraint firstItem="uyv-E3-bHO" firstAttribute="leading" secondItem="52E-Sp-VKu" secondAttribute="leading" constant="20" id="oRS-ys-KOG"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cameraBtn" destination="leb-Jd-i7D" id="8Yg-Xz-h17"/>
+                        <outlet property="photoBtn" destination="leb-Jd-i7D" id="oc5-s7-xu2"/>
                         <outlet property="scaleLabel" destination="uyv-E3-bHO" id="nCO-jr-uun"/>
+                        <outlet property="timeLabel" destination="TaR-EH-Kmz" id="02F-WB-qb2"/>
+                        <outlet property="videoBtn" destination="Ake-6a-CbV" id="Vms-vx-pKy"/>
                         <segue destination="aTI-Bf-s6d" kind="presentation" identifier="showImage" modalPresentationStyle="fullScreen" id="9zz-gw-Ts1"/>
+                        <segue destination="grS-mv-9YC" kind="presentation" identifier="playVideo" id="hcL-cz-gDc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ler-GT-OHm" sceneMemberID="firstResponder"/>
@@ -131,11 +164,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jh1-jN-0gO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FcJ-As-DPS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="297" y="85"/>
+            <point key="canvasLocation" x="286" y="-208"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="lwO-w1-NsR">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="grS-mv-9YC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ceX-ot-A4S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="285" y="480"/>
         </scene>
     </scenes>
     <resources>
         <image name="circle.inset.filled" catalog="system" width="128" height="121"/>
+        <image name="dot.circle.viewfinder" catalog="system" width="128" height="115"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
