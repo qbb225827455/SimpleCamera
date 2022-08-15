@@ -122,7 +122,7 @@ class CameraViewController: UIViewController {
         let largeBoldDoc2 = UIImage(systemName: "viewfinder.circle.fill", withConfiguration: largeConfig)
         
         videoBtn.setImage(largeBoldDoc2, for: .normal)
-        videoBtn.isHidden = true
+        videoBtn.alpha = 0
         
         timeLabel.isHidden = true
         timeLabel.layer.masksToBounds = true
@@ -307,11 +307,67 @@ class CameraViewController: UIViewController {
     // MARK: - SwipeLeft 更換相機模式(拍照 or 錄影)
     
     @objc func changeBtn() {
-        photoBtn.isHidden.toggle()
-        videoBtn.isHidden.toggle()
+        
         timeLabel.isHidden.toggle()
         
-        if !photoBtn.isHidden {
+        // MARK: 切換按鈕動畫
+        // video -> photo
+        if timeLabel.isHidden {
+            
+            //videoBtn.isHidden.toggle()
+            //photoBtn.isHidden.toggle()
+            
+            let moveRightTransform = CGAffineTransform.init(translationX: 50, y: 0)
+            let scaleTransform = CGAffineTransform.init(scaleX: 0.7, y: 0.7)
+            let moveScaleTransform = scaleTransform.concatenating(moveRightTransform)
+            photoBtn.transform = moveScaleTransform
+            photoBtn.alpha = 0.3
+            
+            videoBtn.transform = .identity
+            videoBtn.alpha = 1.0
+            
+            UIView.animate(withDuration: 1, delay: 0.0, options: [], animations: { () -> Void in
+                let moveLeftTransform = CGAffineTransform.init(translationX: -70, y: 0)
+                let scaleTransform = CGAffineTransform.init(scaleX: 0.7, y: 0.7)
+                let moveScaleTransform = scaleTransform.concatenating(moveLeftTransform)
+                self.videoBtn.transform = moveScaleTransform
+                self.videoBtn.alpha = 0
+                
+                self.photoBtn.transform = .identity
+                self.photoBtn.alpha = 1.0
+            }, completion: nil)
+        }
+        // photo -> video
+        if !timeLabel.isHidden {
+            
+            //videoBtn.isHidden.toggle()
+            //photoBtn.isHidden.toggle()
+            
+            let moveRightTransform = CGAffineTransform.init(translationX: 50, y: 0)
+            let scaleTransform = CGAffineTransform.init(scaleX: 0.7, y: 0.7)
+            let moveScaleTransform = scaleTransform.concatenating(moveRightTransform)
+            videoBtn.transform = moveScaleTransform
+            videoBtn.alpha = 0.3
+            timeLabel.alpha = 0
+            
+            photoBtn.transform = .identity
+            photoBtn.alpha = 1.0
+            
+            UIView.animate(withDuration: 1, delay: 0.0, options: [], animations: { () -> Void in
+                let moveLeftTransform = CGAffineTransform.init(translationX: -70, y: 0)
+                let scaleTransform = CGAffineTransform.init(scaleX: 0.7, y: 0.7)
+                let moveScaleTransform = scaleTransform.concatenating(moveLeftTransform)
+                self.photoBtn.transform = moveScaleTransform
+                self.photoBtn.alpha = 0
+                
+                self.videoBtn.transform = .identity
+                self.videoBtn.alpha = 1.0
+                self.timeLabel.alpha = 1.0
+            }, completion: nil)
+        }
+        
+        // MARK: 切換模式後，設定captureSession的輸出
+        if timeLabel.isHidden {
             for output in captureSession.outputs {
                 captureSession.removeOutput(output)
             }
@@ -319,7 +375,7 @@ class CameraViewController: UIViewController {
                 captureSession.addOutput(imageOutput)
             }
         }
-        if !videoBtn.isHidden {
+        if !timeLabel.isHidden {
             for output in captureSession.outputs {
                 captureSession.removeOutput(output)
             }
